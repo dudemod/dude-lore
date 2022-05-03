@@ -254,7 +254,7 @@ class TitleState extends MusicBeatState
 			}
 		}
 
-		Conductor.changeBPM(titleJSON.bpm);
+		Conductor.changeBPM(140);
 		persistentUpdate = true;
 		lore.Colorblind.updateFilter();
 		var bg:FlxSprite = new FlxSprite();
@@ -270,7 +270,7 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
-		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
+		logoBl = new FlxSprite(0, 0);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		
 		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
@@ -576,10 +576,12 @@ class TitleState extends MusicBeatState
 			switch (curBeat)
 			{
 				case 1:
-					createCoolText(['sayofthelor']);
+					createCoolText(['Created by'], 45);
 				// credTextShit.visible = true;
 				case 3:
-					addMoreText('presents');
+					addMoreText('macaroni boi', 45);
+					addMoreText('sayofthelor', 45);
+					addMoreText('geno', 45);
 				// credTextShit.text += '\npresent...';
 				// credTextShit.addText();
 				case 4:
@@ -588,14 +590,12 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
 				case 5:
-					createCoolText(['lmao'], -40);
+					createCoolText(['In the works since'], 45);
 				case 7:
-					addMoreText('newgrounds', -40);
-					ngSpr.visible = true;
+					addMoreText('July 2021', 45);
 				// credTextShit.text += '\nNewgrounds';
 				case 8:
 					deleteCoolText();
-					ngSpr.visible = false;
 				// credTextShit.visible = false;
 
 				// credTextShit.text = 'Shoutouts Tom Fulp';
@@ -616,10 +616,10 @@ class TitleState extends MusicBeatState
 					addMoreText('Night');
 				// credTextShit.visible = true;
 				case 14:
-					addMoreText('Funkin\'');
+					addMoreText('Frickin\'');
 				// credTextShit.text += '\nNight';
 				case 15:
-					addMoreText('Lore Engine'); // credTextShit.text += '\nFunkin';
+					addMoreText('Vs. Dude'); // credTextShit.text += '\nFunkin';
 
 				case 16:
 					skipIntro();

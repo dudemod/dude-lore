@@ -28,18 +28,15 @@ class MainMenuState extends MusicBeatState
 {
 	public static var loreEngineVersion:String = '0.3.5';
 	public static var psychEngineVersion:String = '0.5.2'; // to maximize compatibility
+	public static var dudeVer:String = '0.1.0';
 	public static var curSelected:Int = 0;
-	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('Main_Checker'), 0.2, 0.2, true, true);
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'awards', #end
-		'credits',
-		#if !switch 'donate', #end
 		'options'
 	];
 
@@ -75,9 +72,10 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.color = 0xFFFE4B4B;
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
@@ -95,12 +93,10 @@ class MainMenuState extends MusicBeatState
 		magenta.screenCenter();
 		magenta.visible = false;
 		magenta.antialiasing = ClientPrefs.globalAntialiasing;
-		magenta.color = 0xFFfd719b;
+		magenta.color = 0xFFC1CBFC;
 		add(magenta);
 		
 		// magenta.scrollFactor.set();
-		add(checker);
-		checker.scrollFactor.set(0.07,0);
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
@@ -175,8 +171,6 @@ class MainMenuState extends MusicBeatState
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
-		checker.x -= 0.45 / (ClientPrefs.framerate / 60);
-		checker.y -= 0.16 / (ClientPrefs.framerate / 60);
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 		if (!selectedSomethin)
